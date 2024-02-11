@@ -8,7 +8,7 @@ return {
       all = {
         white = "#D9E0EE",
         darker_black = "#191828",
-        black = "#1E1D2D", --  nvim bg
+        black = "#1E1D2D",  --  nvim bg
         black2 = "#252434",
         one_bg = "#2d2c3c", -- real bg of onedark
         one_bg2 = "#363545",
@@ -41,13 +41,36 @@ return {
     },
     custom_highlights = function(colors)
       return {
+        -- Barbar integrations
+        BufferCurrent = { bg = colors.base, fg = colors.text },
+        BufferCurrentIndex = { bg = colors.base, fg = colors.blue },
+        BufferCurrentMod = { bg = colors.base, fg = colors.yellow },
+        BufferCurrentSign = { bg = colors.base, fg = colors.blue },
+        BufferCurrentTarget = { bg = colors.base, fg = colors.red },
+        BufferCurrentHINT = { bg = colors.base, fg = colors.green },
+        BufferCurrentWARN = { bg = colors.base, fg = colors.yellow },
+        BufferCurrentERROR = { bg = colors.base, fg = colors.red },
+        BufferCurrentINFO = { bg = colors.base, fg = colors.teal },
+        BufferVisible = { bg = colors.base, fg = colors.text },
+        BufferVisibleIndex = { bg = colors.base, fg = colors.blue },
+        BufferVisibleMod = { bg = colors.base, fg = colors.yellow },
+        BufferVisibleSign = { bg = colors.base, fg = colors.blue },
+        BufferVisibleTarget = { bg = colors.base, fg = colors.red },
+        BufferInactive = { bg = colors.mantle, fg = colors.overlay0 },
+        BufferInactiveIndex = { bg = colors.mantle, fg = colors.overlay0 },
+        BufferInactiveMod = { bg = colors.mantle, fg = colors.yellow },
+        BufferInactiveSign = { bg = colors.mantle, fg = colors.blue },
+        BufferInactiveTarget = { bg = colors.mantle, fg = colors.red },
+        BufferTabpages = { bg = colors.surface0, fg = colors.none },
+        BufferTabpage = { bg = colors.surface0, fg = colors.blue },
+
         -- Cmp integrations
         CmpItemAbbr = { fg = colors.overlay2 },
         CmpItemAbbrDeprecated = { fg = colors.overlay0, style = { 'strikethrough' } },
         CmpItemKind = { fg = colors.blue },
         CmpItemMenu = { fg = colors.text },
         CmpItemAbbrMatch = { fg = colors.text, style = { 'bold' } },
-        CmpItemAbbrMatchFuzzy = { fg =  colors.text, style = { 'bold' } },
+        CmpItemAbbrMatchFuzzy = { fg = colors.text, style = { 'bold' } },
 
         CmpDoc = { bg = colors.darker_black },
         CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
@@ -126,6 +149,26 @@ return {
         DevIconJava = { fg = colors.orange },
         DevIconDart = { fg = colors.cyan },
 
+        -- Lualine integrations
+        LuaLineEmptySep = { bg = colors.surface1 },
+        LuaLineNormalSectionA = { bg = colors.blue, fg = colors.mantle, bold = true },
+        LuaLineNormalSectionB = { bg = colors.surface0, fg = colors.blue },
+        LuaLineNormalSectionC = { bg = colors.mantle, fg = colors.overlay0 },
+        LuaLineInsertSectionA = { bg = colors.green, fg = colors.mantle, bold = true },
+        LuaLineInsertSectionB = { bg = colors.surface0, fg = colors.green },
+        LuaLineVisualSectionA = { bg = colors.lavender, fg = colors.mantle, bold = true },
+        LuaLineVisualSectionB = { bg = colors.surface0, fg = colors.lavender },
+        LuaLineGitBranch = { bg = colors.mantle, fg = colors.overlay0 },
+        LuaLineLspStatus = { bg = colors.mantle, fg = colors.blue },
+        LuaLineFolderIcon = { bg = colors.pink, fg = colors.mantle, bold = true },
+        LuaLineStackIcon = { bg = colors.green, fg = colors.mantle },
+        LuaLineCwd = { fg = colors.text, bg = colors.surface0 },
+        LuaLineProgress = { fg = colors.green, bg = colors.surface0 },
+        DiagnosticError = { fg = colors.red, bg = colors.mantle },
+        DiagnosticWarn = { fg = colors.yellow, bg = colors.mantle },
+        DiagnosticInfo = { fg = colors.blue, bg = colors.mantle },
+        DiagnosticHint = { fg = colors.teal, bg = colors.mantle },
+
         -- Nvim-tree integrations
         NvimTreeEmptyFolderName = { fg = colors.folder_bg },
         NvimTreeEndOfBuffer = { fg = colors.darker_black },
@@ -166,7 +209,7 @@ return {
         },
 
         -- Which key integrations
-        WhichKey = { link = 'Normal'},
+        WhichKey = { link = 'Normal' },
         WhichKeyBorder = { link = 'FloatBorder' },
         WhichKeyGroup = { fg = colors.blue },
         WhichKeySeparator = { fg = colors.overlay0 },
