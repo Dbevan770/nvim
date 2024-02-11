@@ -27,7 +27,67 @@ return {
       ignore_whitespace = false,
       virt_text_priority = 100,
     },
-    current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+    current_line_blame_formatter = function(name, blame_info)
+      -- Replace author_name with 'You' if current user's 
+      -- git config contains the same name
+      local author = (name == blame_info.author and 'You') or blame_info.author
+
+      -- Get the time for today in seconds
+      -- Get the difference in time fron blame date
+      -- Convert to days
+      local now = os.time()
+      local time_diff = now - blame_info.author_time
+      local days_diff = math.floor(time_diff / (60 * 60 * 24))
+      local year_in_days = 365.25
+
+      local author_string
+
+      -- When less than 1 year use relative time
+      if days_diff < year_in_days then
+        local current_day = os.date('*t')
+        local author_day = os.date('*t', blame_info.author_time)
+
+        if current_day.year == author_day.year and current_day.yday == author_day.yday then
+          author_string = string.format('%s, Today at %s - %s',
+            author,
+            os.date('%I:%M %p', blame_info.author_time),
+            blame_info.summary
+          )
+        elseif current_day.year == author_day.year and current_day.yday - 1 == author_day.yday then
+          author_string = string.format('%s, Yesterday at %s - %s',
+            author,
+            os.date('%I:%M %p', blame_info.author_time),
+            blame_info.summary
+          )
+        -- Less than 1 month (approx since using 30days)
+        -- Show totals days since commit to now
+        elseif days_diff < 30 then
+          author_string = string.format('%s, %d days ago - %s',
+            author,
+            days_diff,
+            blame_info.summary
+          )
+        -- If more than a month show months
+        else
+          author_string = string.format('%s, %d months ago - %s',
+            author,
+            math.floor(days_diff / 30),
+            blame_info.summary
+          )
+        end
+      -- If more than a year show actual date
+      else
+        author_string = string.format('%s, %s - %s',
+          author,
+          os.date('%d %b %Y', blame_info.author_time),
+          blame_info.summary
+        )
+      end
+
+      -- Return as list of tuples with
+      -- (formatted_str, highlight_group)
+      return {{author_string, 'GitSignsCurrentLineBlame'}}
+    end,
     sign_priority = 6,
     update_debounce = 100,
     status_formatter = nil, -- Use default
