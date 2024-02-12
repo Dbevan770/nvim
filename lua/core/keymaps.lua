@@ -87,3 +87,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+-- Dotnet mappings
+vim.keymap.set('n', '<leader>nr', '<CMD>!dotnet run<CR>', {
+  desc = 'Dot[N]et [R]un'
+})
+
+vim.keymap.set('n', '<leader>nb', '<CMD>!dotnet build<CR>', {
+  desc = 'Dot[N]et [B]uild'
+})
