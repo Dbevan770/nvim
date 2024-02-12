@@ -21,6 +21,12 @@ return {
     map('n', '<leader>gp', '<CMD>Git push<CR>', {
       desc = '[G]it [P]ush current commits'
     })
+    map('n', '<leader>gP', '<CMD>Git pull<CR>', {
+      desc = '[G]it [P]ull latest commits'
+    })
+    map('n', '<leader>gF', '<CMD>Git fetch<CR>', {
+      desc = '[G]it [F]etch latest commits'
+    })
     map('n', '<leader>gA', '<CMD>Gwrite<CR>', {
       desc = '[G]it [A]dd current buffer'
     })
