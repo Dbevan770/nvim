@@ -29,7 +29,7 @@ return {
 
     max_concurrent_installers = 10,
   },
-  config = function (_, opts)
+  config = function(_, opts)
     local servers = {
       bashls = {},
       clangd = {},
@@ -41,7 +41,7 @@ return {
       gopls = {},
       gradle_ls = {},
       html = {
-        filetypes = { 'html', 'twig', 'hbs'},
+        filetypes = { 'html', 'twig', 'hbs' },
       },
       jsonls = {},
       java_language_server = {},
@@ -68,22 +68,6 @@ return {
       },
       marksman = {},
       pyright = {},
-      rust_analyzer = {
-        tools = {
-          runnables = {
-            use_telescope = true,
-          },
-          inlay_hints = {
-            auto = true,
-            show_parameter_hints = true,
-            parameter_hints_prefix = '',
-            other_hints_prefix = '',
-          }
-        },
-        checkOnSave = {
-          command = 'clippy',
-        },
-      },
       sqls = {},
       tailwindcss = {},
       tsserver = {},
@@ -93,7 +77,7 @@ return {
 
     local on_attach = function(_, bufnr)
       local builtin = require('telescope.builtin')
-      local nmap = function (keys, func, desc)
+      local nmap = function(keys, func, desc)
         if desc then
           desc = 'LSP: ' .. desc
         end
@@ -102,7 +86,7 @@ return {
       end
 
       nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-      nmap('<leader>ca', function ()
+      nmap('<leader>ca', function()
         vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
       end, '[C]ode [A]ction')
 
@@ -126,6 +110,8 @@ return {
       vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()
       end, { desc = 'Format current buffer with LSP' })
+
+      nmap('<leader>f', '<cmd>Format<CR>', '[F]ormat buffer')
     end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -135,7 +121,7 @@ return {
 
     mason_lspconfig.setup(opts)
 
-    vim.api.nvim_create_user_command("MasonInstallAll", function ()
+    vim.api.nvim_create_user_command("MasonInstallAll", function()
       if opts.ensure_installed and #opts.ensure_installed > 0 then
         vim.cmd('MasonInstall ' .. table.concat(opts.ensure_installed, ' '))
       end
@@ -144,7 +130,7 @@ return {
     vim.g.mason_binaries_list = opts.ensure_installed
 
     mason_lspconfig.setup_handlers {
-      function (server_name)
+      function(server_name)
         require('lspconfig')[server_name].setup({
           capabilities = capabilities,
           on_attach = on_attach,

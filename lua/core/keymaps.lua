@@ -35,11 +35,6 @@ vim.keymap.set('n', '<Space>', '<nop>', { silent = true })
 -- Create a new tmux session
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux new tmux-sessionizer<CR>")
 
--- Trigger lsp formatting for the current buffer
-vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format()
-end)
-
 -- Movement keybinds
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz")
