@@ -4,40 +4,40 @@ return {
     local map = vim.keymap.set
 
     map("n", "<leader>gs", vim.cmd.Git,
-      { desc = "Open Git Status windows" }
+      { desc = "Open [G]it [S]tatus windows" }
     )
     map('n', '<leader>gb', '<CMD>Git blame<CR>',
-      { desc = 'Run Git blame on current file'}
+      { desc = 'Run [G]it [B]lame on current file'}
     )
     map('n', '<leader>gd', '<CMD>Git difftool<CR>', {
-      desc = 'Opens Git Difftool'
+      desc = 'Open [G]it [D]iff tool'
     })
     map('n', '<leader>gm', '<CMD>Git mergetool<CR>', {
-      desc = 'Open merge tool to resolve merge conflicts'
+      desc = 'Open [G]it [M]erge tool to resolve merge conflicts'
     })
     map('n', '<leader>gl', '<CMD>Git log --oneline<CR>', {
-      desc = "Open Git Log"
+      desc = "Open [G]it [L]og"
+    })
+    map('n', '<leader>gp', '<CMD>Git push<CR>', {
+      desc = '[G]it [P]ush current commits'
     })
     map('n', '<leader>gA', '<CMD>Gwrite<CR>', {
-      desc = 'Git add current buffer'
+      desc = '[G]it [A]dd current buffer'
     })
     map('n', '<leader>gaq', '<CMD>Gwq<CR>', {
-      desc = 'Git add and close buffer'
+      desc = '[G]it [A]dd and close buffer'
     })
     map('n', '<leader>gaQ', '<CMD>Gwq!<CR>', {
-      desc = 'Force git add and close buffer'
+      desc = 'Force [G]it [A]dd and close buffer'
     })
     map('n', '<leader>gD', '<CMD>GDelete<CR>', {
-      desc = 'Git remove file and delete buffer'
+      desc = '[G]it remove file and [D]elete buffer'
     })
     map('n', '<leader>gdD', '<CMD>GDelete!<CR>', {
       desc = 'Git rm file and pass -f force flag'
     })
     map('n', '<leader>gR', '<CMD>GRemove<CR>', {
       desc = 'Git rm but keep buffer (now empty)'
-    })
-    map('n', '<leader>gB', '<CMD>GBrowse<CR>', {
-      desc = 'Open Browser and navigate to upstream repo host'
     })
   end
 }
