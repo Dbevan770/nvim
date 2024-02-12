@@ -36,7 +36,7 @@ return {
       adaptive_size = false,
       side = "left",
       width = 30,
-      preserve_window_proportions = true,
+      preserve_window_proportions = false,
     },
     git = {
       enable = false,

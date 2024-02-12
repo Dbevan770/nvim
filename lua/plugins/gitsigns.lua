@@ -2,7 +2,7 @@ return {
   'lewis6991/gitsigns.nvim',
   event = 'User FilePost',
   opts = {
-    signs = {
+    signs                        = {
       add = { text = "│" },
       change = { text = "│" },
       delete = { text = "󰍵" },
@@ -10,17 +10,17 @@ return {
       changedelete = { text = "~" },
       untracked = { text = "│" },
     },
-    signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-    numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-    linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-    word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-    watch_gitdir = {
+    signcolumn                   = true, -- Toggle with `:Gitsigns toggle_signs`
+    numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
+    linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
+    word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
+    watch_gitdir                 = {
       follow_files = true
     },
-    auto_attach = true,
-    attach_to_untracked = true,
-    current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-    current_line_blame_opts = {
+    auto_attach                  = true,
+    attach_to_untracked          = true,
+    current_line_blame           = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    current_line_blame_opts      = {
       virt_text = true,
       virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
       delay = 1000,
@@ -28,7 +28,7 @@ return {
       virt_text_priority = 100,
     },
     current_line_blame_formatter = function(name, blame_info)
-      -- Replace author_name with 'You' if current user's 
+      -- Replace author_name with 'You' if current user's
       -- git config contains the same name
       local author = (name == blame_info.author and 'You') or blame_info.author
 
@@ -53,21 +53,21 @@ return {
             os.date('%I:%M %p', blame_info.author_time),
             blame_info.summary
           )
-        elseif current_day.year == author_day.year and current_day.yday - 1 == author_day.yday then
+        elseif current_day.year == author_day.year and current_day.yday - 1 == author_day.yday or days_diff == 1 then
           author_string = string.format('%s, Yesterday at %s - %s',
             author,
             os.date('%I:%M %p', blame_info.author_time),
             blame_info.summary
           )
-        -- Less than 1 month (approx since using 30days)
-        -- Show totals days since commit to now
+          -- Less than 1 month (approx since using 30days)
+          -- Show totals days since commit to now
         elseif days_diff < 30 then
           author_string = string.format('%s, %d days ago - %s',
             author,
             days_diff,
             blame_info.summary
           )
-        -- If more than a month show months
+          -- If more than a month show months
         else
           author_string = string.format('%s, %d months ago - %s',
             author,
@@ -75,7 +75,7 @@ return {
             blame_info.summary
           )
         end
-      -- If more than a year show actual date
+        -- If more than a year show actual date
       else
         author_string = string.format('%s, %s - %s',
           author,
@@ -86,13 +86,13 @@ return {
 
       -- Return as list of tuples with
       -- (formatted_str, highlight_group)
-      return {{author_string, 'GitSignsCurrentLineBlame'}}
+      return { { author_string, 'GitSignsCurrentLineBlame' } }
     end,
-    sign_priority = 6,
-    update_debounce = 100,
-    status_formatter = nil, -- Use default
-    max_file_length = 40000, -- Disable if file is longer than this (in lines)
-    preview_config = {
+    sign_priority                = 6,
+    update_debounce              = 100,
+    status_formatter             = nil, -- Use default
+    max_file_length              = 40000, -- Disable if file is longer than this (in lines)
+    preview_config               = {
       -- Options passed to nvim_open_win
       border = 'single',
       style = 'minimal',
@@ -100,10 +100,10 @@ return {
       row = 0,
       col = 1
     },
-    yadm = {
+    yadm                         = {
       enable = false
     },
-    on_attach = function(bufnr)
+    on_attach                    = function(bufnr)
       local gs = package.loaded.gitsigns
 
       local function map(mode, l, r, opts)
@@ -113,71 +113,58 @@ return {
       end
 
       -- Navigation
-      map('n', ']c', function()
-        if vim.wo.diff then return ']c' end
-        vim.schedule(function() gs.next_hunk() end)
+      map({ 'n', 'v' }, ']c', function()
+        if vim.wo.diff then
+          return ']c'
+        end
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
         return '<Ignore>'
-      end, {
-        expr = true,
-        desc = 'Next Hunk'
-      })
+      end, { expr = true, desc = 'Jump to next hunk' })
 
-      map('n', '[c', function()
-        if vim.wo.diff then return '[c' end
-        vim.schedule(function() gs.prev_hunk() end)
+      map({ 'n', 'v' }, '[c', function()
+        if vim.wo.diff then
+          return '[c'
+        end
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
         return '<Ignore>'
-      end, {
-        expr = true,
-        desc = 'Previous Hunk',
-      })
+      end, { expr = true, desc = 'Jump to previous hunk' })
 
       -- Actions
-      map('n', '<leader>hs', gs.stage_hunk,
-      { desc = 'Stage Hunk' })
-      map('n', '<leader>hr', gs.reset_hunk,
-      { desc = 'Reset Hunk' })
-      map('v', '<leader>hs',
-      function()
-        gs.stage_hunk {
-          vim.fn.line('.'),
-          vim.fn.line('v')
-        }
-      end,
-      { desc = "Stage Hunk (Visual)" })
-      map('v', '<leader>hr',
-      function()
-        gs.reset_hunk
-        {
-          vim.fn.line('.'),
-          vim.fn.line('v')
-        }
-      end,
-      { desc = 'Reset Hunk (Visual)' })
-      map('n', '<leader>hS', gs.stage_buffer,
-      { desc = 'Stage Buffer' })
-      map('n', '<leader>hu', gs.undo_stage_hunk,
-      { desc = 'Undo Stage Hunk' })
-      map('n', '<leader>hR', gs.reset_buffer,
-      { desc = 'Reset Buffer' })
-      map('n', '<leader>hp', gs.preview_hunk,
-      { desc = 'Preview Hunk' })
-      map('n', '<leader>hb', function() gs.blame_line{full=true} end,
-      { desc = 'Git blame (Current Line)' })
-      map('n', '<leader>tb', gs.toggle_current_line_blame,
-      { desc = 'Git blame (Toggle)' })
-      map('n', '<leader>hd', gs.diffthis,
-      { desc = 'Git diff this' })
-      map('n', '<leader>hD', function() gs.diffthis('~') end,
-      { desc = 'Git diff this from root' })
-      map('n', '<leader>td', gs.toggle_deleted,
-      { desc = 'Toggle Deleted' })
+      -- visual mode
+      map('v', '<leader>hs', function()
+        gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      end, { desc = 'stage git hunk' })
+      map('v', '<leader>hr', function()
+        gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+      end, { desc = 'reset git hunk' })
+      -- normal mode
+      map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
+      map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
+      map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
+      map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+      map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
+      map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
+      map('n', '<leader>hb', function()
+        gs.blame_line { full = false }
+      end, { desc = 'git blame line' })
+      map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
+      map('n', '<leader>hD', function()
+        gs.diffthis '~'
+      end, { desc = 'git diff against last commit' })
+
+      -- Toggles
+      map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
+      map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle git show deleted' })
 
       -- Text object
-      map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>',
-      { desc = 'Gitsigns Select Hunk' })
+      map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
     end
   },
-  config = function (_, opts)
+  config = function(_, opts)
     require('gitsigns').setup(opts)
   end
 }

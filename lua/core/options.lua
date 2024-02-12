@@ -33,6 +33,7 @@ vim.opt.shortmess:append "sI"
 
 -- Text Wrapping
 vim.opt.wrap = true
+vim.o.breakindent = true
 
 -- File System
 vim.opt.swapfile = false
@@ -56,6 +57,7 @@ vim.opt.isfname:append("@-@")
 
 -- Update Time
 vim.opt.updatetime = 50
+vim.o.timeoutlen = 300
 
 -- Right side column position
 vim.opt.colorcolumn = "100"

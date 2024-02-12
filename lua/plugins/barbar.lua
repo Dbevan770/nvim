@@ -149,6 +149,9 @@ return {
       },
     },
     tabpages = true,
+    exclude_ft = {
+      'gitcommit'
+    }
   },
   config = function(_, opts)
     require('barbar').setup(opts)
