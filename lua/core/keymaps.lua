@@ -69,14 +69,14 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 -- Github CLI mappings
 vim.keymap.set('n', '<leader>ghrcp', function()
   vim.ui.input({
-      prompt = 'Enter the name of the repo: '
-    },
+    prompt = 'Enter the name of the repo: '
+  },
     function(input)
       vim.cmd(string.format("!gh repo create %s --public", input))
     end)
 end, {
-  desc = 'GitHub repo create (Public)'
-})
+    desc = 'GitHub repo create (Public)'
+  })
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -96,3 +96,11 @@ vim.keymap.set('n', '<leader>nr', '<CMD>!dotnet run<CR>', {
 vim.keymap.set('n', '<leader>nb', '<CMD>!dotnet build<CR>', {
   desc = 'Dot[N]et [B]uild'
 })
+
+--Modify Copilot mappings
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
+

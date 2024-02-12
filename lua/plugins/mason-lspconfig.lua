@@ -14,6 +14,7 @@ return {
         package_uninstalled = " 󰚌",
       },
 
+
       keymaps = {
         toggle_server_expand = "<CR>",
         install_server = "i",
@@ -32,6 +33,7 @@ return {
     local servers = {
       bashls = {},
       clangd = {},
+      csharp_ls = {},
       cssls = {},
       dockerls = {},
       docker_compose_language_service = {},
@@ -65,9 +67,23 @@ return {
         },
       },
       marksman = {},
-      omnisharp = {},
       pyright = {},
-      rust_analyzer = {},
+      rust_analyzer = {
+        tools = {
+          runnables = {
+            use_telescope = true,
+          },
+          inlay_hints = {
+            auto = true,
+            show_parameter_hints = true,
+            parameter_hints_prefix = '',
+            other_hints_prefix = '',
+          }
+        },
+        checkOnSave = {
+          command = 'clippy',
+        },
+      },
       sqls = {},
       tailwindcss = {},
       tsserver = {},

@@ -42,7 +42,7 @@ return {
 
     return {
       completion = {
-        completeopt = "menu,menuone",
+        completeopt = "menu,menuone,noinsert,noselect",
       },
       window = {
         completion = {
