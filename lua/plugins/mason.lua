@@ -1,6 +1,7 @@
 return {
   'williamboman/mason.nvim',
-  config = function()
-    require('mason').setup()
+  opts = {},
+  config = function(_, opts)
+    require('mason').setup(opts)
   end
 }

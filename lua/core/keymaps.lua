@@ -91,11 +91,3 @@ vim.keymap.set('n', '<leader>nr', '<CMD>!dotnet run<CR>', {
 vim.keymap.set('n', '<leader>nb', '<CMD>!dotnet build<CR>', {
   desc = 'Dot[N]et [B]uild'
 })
-
---Modify Copilot mappings
-vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false
-})
-vim.g.copilot_no_tab_map = true
-

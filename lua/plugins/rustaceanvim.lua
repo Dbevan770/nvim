@@ -11,6 +11,9 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       },
+      cargo = {
+        allFeatures = true,
+      },
     }
   end
 }

@@ -29,7 +29,7 @@ vim.opt.smartcase = true
 vim.opt.mouse = "a"
 
 -- Disable Nvim Intro
-vim.opt.shortmess:append "sI"
+vim.opt.shortmess:append("sI")
 
 -- Text Wrapping
 vim.opt.wrap = true
@@ -61,8 +61,9 @@ vim.o.timeoutlen = 300
 
 -- Right side column position
 vim.opt.colorcolumn = "100"
+vim.opt.textwidth = 100
 
-vim.opt.whichwrap:append "<>[]hl"
+vim.opt.whichwrap:append("<>[]hl")
 
 -- Map Leader
 vim.g.mapleader = " "
