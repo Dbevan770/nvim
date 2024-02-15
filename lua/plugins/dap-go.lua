@@ -1,7 +1,10 @@
 return {
 	"leoluz/nvim-dap-go",
 	ft = "go",
-	dependencies = { "nvim-dap" },
+	dependencies = {
+		"mfussenegger/nvim-dap",
+		"rcarriga/nvim-dap-ui",
+	},
 	config = function(_, opts)
 		local dap_go = require("dap-go")
 		dap_go.setup(opts)
