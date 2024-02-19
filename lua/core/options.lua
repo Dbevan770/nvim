@@ -1,69 +1,92 @@
+local opt = vim.opt
+local g = vim.g
+
+-------------------------- Global Options --------------------------
+-- Map Leader
+g.mapleader = " "
+g.maplocalleader = " "
+
 -- Disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
+------------------------------ Options ------------------------------
 -- Global Status Line
-vim.opt.laststatus = 3
-vim.opt.showmode = false
+opt.laststatus = 3
+opt.showmode = false
 
-vim.opt.clipboard = "unnamedplus"
-vim.opt.cursorline = true
+-- Global Clipboard
+opt.clipboard = "unnamedplus"
+opt.cursorline = true
 
--- Line Numbers
-vim.opt.number = true
-vim.opt.numberwidth = 2
-vim.opt.ruler = false
+-- Indenting
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.smartindent = true
+opt.tabstop = 2
+opt.softtabstop = 2
 
--- Tab Width
-vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+opt.fillchars = { eob = " " }
+opt.ignorecase = true
+opt.smartcase = true
+opt.mouse = "a"
 
--- Smart Indent
-vim.opt.smartindent = true
-
-vim.opt.fillchars = { eob = " " }
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.mouse = "a"
+-- Numbers
+opt.number = true
+opt.numberwidth = 2
+opt.ruler = false
 
 -- Disable Nvim Intro
-vim.opt.shortmess:append("sI")
+opt.shortmess:append("sI")
+
+opt.signcolumn = "yes"
+opt.splitbelow = true
+opt.splitright = true
+opt.termguicolors = true
+opt.timeoutlen = 400
+opt.undofile = true
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+
+-- Interval for writing swap file to disk
+opt.updatetime = 250
+
+-- Wrap to next or previous line when cursor
+-- reaches the end or beginning of line
+opt.whichwrap:append("<>[]hl")
+
+-- Disable default providers
+for _, provider in ipairs({ "node", "perl", "python3", "ruby" }) do
+	vim.g["loaded_" .. provider .. "_provider"] = 0
+end
 
 -- Text Wrapping
-vim.opt.wrap = true
-vim.o.breakindent = true
+opt.wrap = true
+opt.breakindent = true
 
 -- File System
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.opt.undofile = true
+opt.swapfile = false
+opt.backup = false
 
 -- Search
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
-
--- True Color
-vim.opt.termguicolors = true
+opt.hlsearch = false
+opt.incsearch = true
 
 -- Scroll
-vim.opt.signcolumn = "yes"
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.scrolloff = 8
-vim.opt.isfname:append("@-@")
-
--- Update Time
-vim.opt.updatetime = 50
-vim.o.timeoutlen = 300
+opt.scrolloff = 8
+opt.isfname:append("@-@")
 
 -- Right side column position
-vim.opt.colorcolumn = "100"
-vim.opt.textwidth = 100
+opt.colorcolumn = "100"
+opt.textwidth = 100
 
-vim.opt.whichwrap:append("<>[]hl")
+------------------------------- Auto Commands -------------------------------
 
--- Map Leader
-vim.g.mapleader = " "
+-- Highlight on yank
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
+})

@@ -68,31 +68,12 @@ return {
 			map("n", "<leader>sr", builtin.resume, {
 				desc = "[S]earch [R]esume",
 			})
-			map("n", "<leader>ss", "<CMD>Telescope luasnip<CR>", {
-				desc = "[S]earch [S]nippets",
-			})
 		end,
-		opts = {
-			extensions = {
-				["ui-select"] = {
-					require("telescope.themes").get_dropdown({}),
-				},
-				["luasnip"] = {
-					require("telescope.themes").get_dropdown({}),
-				},
-			},
-		},
+		opts = function()
+			return require("custom.configs.telescope")
+		end,
 		config = function(_, opts)
-			local telescope = require("telescope")
-			telescope.setup(opts)
-			telescope.load_extension("ui-select")
-			telescope.load_extension("luasnip")
+			require("telescope").setup(opts)
 		end,
-	},
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
-	},
-	{
-		"benfowler/telescope-luasnip.nvim",
 	},
 }
