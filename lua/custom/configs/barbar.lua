@@ -1,6 +1,6 @@
 local opts = {
 	animation = true,
-	auto_hide = 1,
+	auto_hide = 0,
 	clickable = false,
 	focus_on_close = "previous",
 	hide = {

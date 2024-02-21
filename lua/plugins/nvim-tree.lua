@@ -9,9 +9,6 @@ return {
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
-	init = function()
-		vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>")
-	end,
 	opts = function()
 		return require("custom.configs.nvim-tree")
 	end,

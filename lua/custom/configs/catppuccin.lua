@@ -111,8 +111,8 @@ local opts = {
 			BufferInactiveModBtn = { bg = colors.mantle, fg = colors.yellow },
 			BufferInactiveSign = { bg = colors.mantle, fg = colors.blue },
 			BufferInactiveTarget = { bg = colors.mantle, fg = colors.red },
-			BufferTabpages = { bg = colors.surface0, fg = colors.none },
-			BufferTabpage = { bg = colors.surface0, fg = colors.blue },
+			BufferTabpages = { bg = colors.mantle, fg = colors.none },
+			BufferTabpage = { bg = colors.mantle, fg = colors.blue },
 
 			-- Cmp integrations
 			CmpItemAbbr = { fg = colors.overlay2 },
@@ -232,58 +232,60 @@ local opts = {
 			DiagnosticHint = { fg = colors.teal, bg = colors.mantle },
 
 			-- Nvim-tree integrations
-			NvimTreeNormal = { bg = colors.mantle, fg = colors.text },
-			NvimTreeNormalNC = { bg = colors.mantle },
+			NvimTreeCursorLine = {
+				bg = colors.black2,
+			},
 			NvimTreeEmptyFolderName = { fg = colors.folder_bg },
 			NvimTreeEndOfBuffer = { fg = colors.darker_black },
-			NvimTreeFolderIcon = { fg = colors.folder_bg },
-			NvimTreeFolderName = { fg = colors.folder_bg },
+			NvimTreeFolderIcon = { fg = colors.blue },
+			NvimTreeFolderName = { fg = colors.blue },
 			NvimTreeFolderArrowOpen = { fg = colors.folder_bg },
 			NvimTreeFolderArrowClosed = { fg = colors.grey_fg },
-			NvimTreeGitDirty = { fg = colors.red },
 			NvimTreeIndentMarker = { fg = colors.surface0 },
+			NvimTreeNormal = { fg = colors.text, bg = colors.mantle },
+			NvimTreeNormalNC = { bg = colors.mantle },
 			NvimTreeOpenedFolderName = { fg = colors.folder_bg },
-			NvimTreeGitIgnored = { fg = colors.light_grey },
-			NvimTreeWinSeparator = {
-				fg = colors.base,
-				bg = colors.base,
+			NvimTreeRootFolder = {
+				fg = colors.red,
+				bold = true,
+			},
+			NvimTreeSpecialFile = {
+				fg = colors.flamingo,
+				bold = true,
 			},
 			NvimTreeWindowPicker = {
 				fg = colors.red,
 				bg = colors.black2,
 			},
-			NvimTreeCursorLine = {
-				bg = colors.black2,
+			NvimTreeWinSeparator = {
+				fg = colors.base,
+				bg = colors.base,
 			},
+
+			-- Nvim-tree Git highlight groups
 			NvimTreeGitNew = {
 				fg = colors.yellow,
 			},
 			NvimGitDeleted = {
 				fg = colors.red,
 			},
-			NvimTreeSpecialFile = {
-				fg = colors.yellow,
-				bold = true,
-			},
-			NvimTreeRootFolder = {
-				fg = colors.red,
-				bold = true,
-			},
+			NvimTreeGitDirty = { fg = colors.red },
+			NvimTreeGitIgnored = { fg = colors.light_grey },
 
 			-- Telescope integrations
-			TelescopeBorder = { fg = colors.mantle, bg = colors.mantle },
+			TelescopeBorder = { fg = colors.blue, bg = colors.darker_black },
 			TelescopeMatching = { fg = colors.blue },
-			TelescopeNormal = { bg = colors.mantle },
-			TelescopePromptBorder = { fg = colors.surface0, bg = colors.surface0 },
-			TelescopePromptNormal = { fg = colors.text, bg = colors.black },
-			TelescopePromptPrefix = { fg = colors.flamingo, bg = colors.surface0 },
+			TelescopeNormal = { bg = colors.darker_black },
+			TelescopePromptBorder = { fg = colors.blue, bg = colors.darker_black },
+			TelescopePromptNormal = { fg = colors.text, bg = colors.darker_black },
+			TelescopePromptPrefix = { fg = colors.flamingo, bg = colors.darker_black },
 			TelescopePreviewTitle = { fg = colors.base, bg = colors.green },
-			TelescopeResultsTitle = { fg = colors.mantle, bg = colors.lavender },
-			TelescopeSelection = { fg = colors.text, bg = colors.surface0, style = { "bold" } },
+			TelescopeResultsTitle = { fg = colors.darker_black, bg = colors.lavender },
+			TelescopeSelection = { fg = colors.text, bg = colors.black2, style = { "bold" } },
 			TelescopeSelectionCaret = { fg = colors.flamingo },
 
 			-- Which key integrations
-			WhichKey = { link = "Normal" },
+			WhichKey = { link = "NormalFloat" },
 			WhichKeyBorder = { link = "FloatBorder" },
 			WhichKeyGroup = { fg = colors.blue },
 			WhichKeySeparator = { fg = colors.overlay0 },

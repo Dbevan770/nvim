@@ -112,6 +112,10 @@ local opts = {
 				colored = true,
 				icon_only = true,
 				icon = { align = "right" },
+				padding = {
+					left = 1,
+					right = 1,
+				},
 			},
 			{
 				"filename",
@@ -124,8 +128,8 @@ local opts = {
 					right = "",
 				},
 				padding = {
-					left = 0,
-					right = 1,
+					left = 1,
+					right = 2,
 				},
 			},
 		},

@@ -1,5 +1,22 @@
-local map = function(mode, key, result, options)
-	vim.keymap.set(mode, key, result, options or {})
+local builtin = require("telescope.builtin")
+local diagnostic = vim.diagnostic
+
+-- Custom keymap function
+local map = function(mode, key, result, desc, options)
+	-- Set default options
+	local default_options = { noremap = true, silent = true, desc = desc }
+	options = default_options and options or default_options
+
+	-- Set the keymap
+	vim.keymap.set(mode, key, result, options)
+end
+
+-- Custom Telescope keymap
+local function telescope_live_grep_open_files()
+	builtin.live_grep({
+		grep_open_files = true,
+		prompt_title = "Live Grep in Open Files",
+	})
 end
 
 -------------------------- Keymaps --------------------------
@@ -8,63 +25,62 @@ end
 
 ------------------------ Normal Mode ------------------------
 
-map("n", "<C-h>", "<CMD>TmuxNavigateLeft<CR>", {
-	silent = true,
-	noremap = true,
-	desc = "Window left",
-})
-map("n", "<C-j>", "<CMD>TmuxNavigateDown<CR>", {
-	silent = true,
-	noremap = true,
-	desc = "Window down",
-})
-map("n", "<C-k>", "<CMD>TmuxNavigateUp<CR>", {
-	silent = true,
-	noremap = true,
-	desc = "Window up",
-})
-map("n", "<C-l>", "<CMD>TmuxNavigateRight<CR>", {
-	silent = true,
-	noremap = true,
-	desc = "Window right",
-})
+map("n", "<C-h>", "<CMD>TmuxNavigateLeft<CR>", "Window left")
+map("n", "<C-k>", "<CMD>TmuxNavigateDown<CR>", "Window down")
+map("n", "<C-j>", "<CMD>TmuxNavigateUp<CR>", "Window up")
+map("n", "<C-l>", "<CMD>TmuxNavigateRight<CR>", "Window right")
 
 -------------------------- General --------------------------
 
 ------------------------ Insert Mode ------------------------
 
 -- Move to beginning or end of line
-map("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })
-map("i", "<C-e>", "<End>", { desc = "End of line" })
+map("i", "<C-b>", "<ESC>^i", "Beginning of line")
+map("i", "<C-e>", "<End>", "End of line")
 
 -- Navigate within insert mode
-map("i", "<C-h>", "<Left>", { desc = "Left" })
-map("i", "<C-j>", "<Down>", { desc = "Down" })
-map("i", "<C-k>", "<Up>", { desc = "Up" })
-map("i", "<C-l>", "<Right>", { desc = "Right" })
+map("i", "<C-h>", "<Left>", "Left")
+map("i", "<C-k>", "<Down>", "Down")
+map("i", "<C-j>", "<Up>", "Up")
+map("i", "<C-l>", "<Right>", "Right")
 
 ------------------------ Normal Mode ------------------------
 
-map("n", "<Esc>", "<CMD>noh<CR>", { desc = "Clear highlights" })
+map("n", "<Esc>", "<CMD>noh<CR>", "Clear highlights")
 
 -- Switch between windows
-map("n", "<C-h>", "<C-w>h", { desc = "Window left" })
-map("n", "<C-j>", "<C-w>j", { desc = "Window down" })
-map("n", "<C-k>", "<C-w>k", { desc = "Window up" })
-map("n", "<C-l>", "<C-w>l", { desc = "Window right" })
+map("n", "<C-h>", "<C-w>h", "Window left")
+map("n", "<C-k>", "<C-w>j", "Window down")
+map("n", "<C-j>", "<C-w>k", "Window up")
+map("n", "<C-l>", "<C-w>l", "Window right")
 
 -- Save the file
-map("n", "<C-s>", "<CMD>w<CR>", { desc = "Save file" })
+map("n", "<C-s>", "<CMD>w<CR>", "Save file")
 
 -- Copy entire file content
-map("n", "<C-c>", "<CMD>%y+<CR>", { desc = "Copy entire file" })
+map("n", "<C-c>", "<CMD>%y+<CR>", "Copy entire file")
 
 -- Line numbers
-map("n", "<leader>tn", "<CMD>set nu!<CR>", { desc = "[T]oggle line [N]umbers" })
-map("n", "<leader>trn", "<CMD>set rnu!<CR>", { desc = "[T]oggle [R]elative line [N]umbers" })
+map("n", "<leader>tn", "<CMD>set nu!<CR>", "[T]oggle line [N]umbers")
+map("n", "<leader>trn", "<CMD>set rnu!<CR>", "[T]oggle [R]elative line [N]umbers")
 
 -- Append line beneath above cursor and keep cursor in place
 map("n", "J", "mzJ`z")
+
+-- Bind U to redo
+map("n", "U", "<C-r>", "Redo")
+
+-- Scrolling
+map("n", ",", "<C-u>", "Scroll up half page")
+map("n", "m", "<C-d>", "Scroll down half page")
+map("n", "M", "m", "Scroll to middle of page")
+
+-- Insert empty line above or below without entering insert mode
+map("n", "<leader>o", ':<C-u>call append(line("."),repeat([""],v:count1))<CR>', "Insert empty line below")
+map("n", "<leader>O", ':<C-u>call append(line(".")-1,repeat([""],v:count1))<CR>', "Insert empty line above")
+
+map("n", "H", "_", "Move to first non-blank character of the line")
+map("n", "L", "$", "Move to end of line")
 
 -- Half page jumping, keep cursor centered
 map("n", "<C-d>", "<C-d>zz")
@@ -82,7 +98,7 @@ map("n", "Q", "<nop>")
 
 -- Overwrites space so it doesn't interfere with
 -- the leader key
-map("n", "<Space>", "<nop>", { silent = true })
+map("n", "<Space>", "<nop>")
 
 -- Create a new tmux session
 map("n", "<C-f>", "<cmd>silent !tmux new tmux-sessionizer<CR>")
@@ -94,38 +110,34 @@ map("n", "<leader>ln", "<cmd>lnext<CR>zz")
 map("n", "<leader>lp", "<cmd>lprev<CR>zz")
 
 -- Remap for dealing with word wrap
-map("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = "Move up", expr = true })
-map("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = "Move down", expr = true })
-map("n", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { desc = "Move up", expr = true })
-map("n", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { desc = "Move down", expr = true })
+map("n", "j", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", { expr = true })
+map("n", "k", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", { expr = true })
+map("n", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gk"', "Move up", { expr = true })
+map("n", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gj"', "Move down", { expr = true })
 
-map("n", "<leader>bn", "<CMD>enew<CR>", { desc = "New buffer" })
+map("n", "<leader>bn", "<CMD>enew<CR>", "New buffer")
 
 map("n", "<leader>f", function()
 	vim.lsp.buf.format({ async = true })
-end, {
-	desc = "Manual Lsp [F]omat",
-})
+end, "Manual Lsp [F]omat")
 
 -- Diagnostic keymaps
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+map("n", "[d", diagnostic.goto_prev, "Go to previous diagnostic message")
+map("n", "]d", diagnostic.goto_next, "Go to next diagnostic message")
+map("n", "<leader>e", diagnostic.open_float, "Open floating diagnostic message")
+map("n", "<leader>q", diagnostic.setloclist, "Open diagnostics list")
 
 ------------------------ Terminal Mode -----------------------
 
 map("t", "<C-x>", function()
 	vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true)
-end, {
-	desc = "Escape terminal mode",
-})
+end, "Escape terminal mode")
 
 ------------------------- Visual Mode ------------------------
 
 -- Move selection up or down
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
+map("v", "K", ":m '>+1<CR>gv=gv") -- DOWN
+map("v", "J", ":m '<-2<CR>gv=gv") -- UP
 
 -- Yank to system clipboard
 map("v", "<leader>y", '"+y')
@@ -133,31 +145,25 @@ map("v", "<leader>y", '"+y')
 -- Delete to void register (gets thrown out)
 map("v", "<leader>d", '"_d')
 
-map("v", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', {
-	desc = "Move up",
+map("v", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", {
 	expr = true,
 })
-map("v", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', {
-	desc = "Move down",
+map("v", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", {
 	expr = true,
 })
-map("v", "<", "<gv", { desc = "Indent line" })
-map("v", ">", ">gv", { desc = "Indent line" })
+map("v", "<", "<gv", "Indent line")
+map("v", ">", ">gv", "Indent line")
 
 -------------------------- Command Mode -----------------------
 
-map("x", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', {
-	desc = "Move up",
+map("x", "j", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", {
 	expr = true,
 })
-map("x", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', {
-	desc = "Move down",
+map("x", "k", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", {
 	expr = true,
 })
 
-map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', {
-	desc = "Paste over while preserving clipboard",
-})
+map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', "Paste over while preserving clipboard")
 
 -- Paste over while preserving clipboard
 map("x", "<leader>p", '"_dP')
@@ -167,134 +173,95 @@ map("x", "<leader>p", '"_dP')
 ------------------------ Normal Mode --------------------------
 
 -- Movement keybinds
-map("n", "<S-Tab>", "<CMD>BufferPrevious<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Previoud buffer",
-})
-map("n", "<Tab>", "<CMD>BufferNext<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Next buffer",
-})
+map("n", "<S-Tab>", "<CMD>BufferPrevious<CR>", "Previous buffer")
+
+map("n", "<Tab>", "<CMD>BufferNext<CR>", "Next buffer")
 
 -- Reorder buffers
-map("n", "<A->>", "<CMD>BufferMoveNext<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Move buffer right",
-})
-map("n", "<A-<>", "<CMD>BufferMovePrevious<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Move buffer left",
-})
+map("n", "<A->>", "<CMD>BufferMoveNext<CR>", "Move buffer right")
+
+map("n", "<A-<>", "<CMD>BufferMovePrevious<CR>", "Move buffer left")
 
 -- Goto buffer in position...
-map("n", "<A-1>", "<CMD>BufferGoto 1<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 1",
-})
-map("n", "<A-2>", "<CMD>BufferGoto 2<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 2",
-})
-map("n", "<A-3>", "<CMD>BufferGoto 3<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 3",
-})
-map("n", "<A-4>", "<CMD>BufferGoto 4<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 4",
-})
-map("n", "<A-5>", "<CMD>BufferGoto 5<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 5",
-})
-map("n", "<A-6>", "<CMD>BufferGoto 6<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 6",
-})
-map("n", "<A-7>", "<CMD>BufferGoto 7<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 7",
-})
-map("n", "<A-8>", "<CMD>BufferGoto 8<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 8",
-})
-map("n", "<A-9>", "<CMD>BufferGoto 9<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto buffer 9",
-})
-map("n", "<A-0>", "<CMD>BufferLast<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Goto last buffer",
-})
+map("n", "<A-1>", "<CMD>BufferGoto 1<CR>", "Goto buffer 1")
+map("n", "<A-2>", "<CMD>BufferGoto 2<CR>", "Goto buffer 2")
+
+map("n", "<A-3>", "<CMD>BufferGoto 3<CR>", "Goto buffer 3")
+
+map("n", "<A-4>", "<CMD>BufferGoto 4<CR>", "Goto buffer 4")
+map("n", "<A-5>", "<CMD>BufferGoto 5<CR>", "Goto buffer 5")
+
+map("n", "<A-6>", "<CMD>BufferGoto 6<CR>", "Goto buffer 6")
+
+map("n", "<A-7>", "<CMD>BufferGoto 7<CR>", "Goto buffer 7")
+
+map("n", "<A-8>", "<CMD>BufferGoto 8<CR>", "Goto buffer 8")
+
+map("n", "<A-9>", "<CMD>BufferGoto 9<CR>", "Goto buffer 9")
+
+map("n", "<A-0>", "<CMD>BufferLast<CR>", "Goto last buffer")
 
 -- Pin current buffer
-map("n", "<A-p>", "<CMD>BufferPin<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Pin buffer",
-})
+map("n", "<A-p>", "<CMD>BufferPin<CR>", "Pin buffer")
 
 -- Close Buffer
-map("n", "<leader>x", "<CMD>BufferClose<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Close buffer",
-})
+map("n", "<leader>x", "<CMD>BufferClose<CR>", "Close buffer")
+
 -- Restore Buffer
-map("n", "<A-s-c>", "<CMD>BufferRestore<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Restore buffer",
-})
+map("n", "<A-s-c>", "<CMD>BufferRestore<CR>", "Restore buffer")
 
 -- Magic? buffer picker mode
-map("n", "<C-p>", "<CMD>BufferPick<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Buffer picker",
-})
-map("n", "<C-p>", "<CMD>BufferPickDelete", {
-	noremap = true,
-	silent = true,
-	desc = "Buffer picker",
-})
+map("n", "<C-p>", "<CMD>BufferPick<CR>", "Buffer picker")
+
+map("n", "<C-p>", "<CMD>BufferPickDelete", "Buffer picker")
 
 -- Buffer sorting
-map("n", "<leader>bb", "<CMD>BufferOrderByBufferNumber<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "",
-})
-map("n", "<leader>bd", "<CMD>BufferOrderByDirectory<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "",
-})
-map("n", "<leader>bl", "<CMD>BufferOrderByLanguage<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "",
-})
-map("n", "<leader>bw", "<CMD>BufferOrderByWindowNumber<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "",
-})
+map("n", "<leader>bb", "<CMD>BufferOrderByBufferNumber<CR>", "")
+map("n", "<leader>bd", "<CMD>BufferOrderByDirectory<CR>", "")
+map("n", "<leader>bl", "<CMD>BufferOrderByLanguage<CR>", "")
+
+map("n", "<leader>bw", "<CMD>BufferOrderByWindowNumber<CR>", "")
+
+---------------------- Nvim-Tree Keymaps ----------------------
+
+------------------------ Normal Mode --------------------------
+
+-- Toggle Nvim-Tree Window
+map("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", "[T]oggle Nvim-[T]ree window")
+
+---------------------- Telescope Keymaps ----------------------
+
+------------------------ Normal Mode --------------------------
+
+map("n", "<leader>/", function()
+	-- You can pass additional configuration to telescope to change theme, layout, etc.
+	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 0,
+		previewer = false,
+	}))
+end, "[/] Fuzzily search in current buffer")
+
+map("n", "<leader><space>", builtin.buffers, "[ ] Find existing buffers")
+
+map("n", "<leader>ss", builtin.builtin, "[S]earch [S]election telescope")
+
+map("n", "<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
+
+map("n", "<leader>sf", builtin.find_files, "[S]earch [F]iles")
+
+map("n", "<leader>gf", builtin.git_files, "Search in [G]it [F]iles")
+
+map("n", "<leader>sw", builtin.grep_string, "[S]earch current [W]ord")
+
+map("n", "<leader>sh", builtin.help_tags, "[S]earch [H]elp")
+
+map("n", "<leader>s/", telescope_live_grep_open_files, "[S]earch [/] in Open Files")
+
+map("n", "<leader>sg", builtin.live_grep, "[S]earch by [G]rep")
+
+map("n", "<leader>?", builtin.oldfiles, "[?] Find recently opened files")
+
+map("n", "<leader>sr", builtin.resume, "[S]earch [R]esume")
 
 ------------------------ Github CLI ---------------------------
 
@@ -307,18 +274,12 @@ map("n", "<leader>ghrcp", function()
 	}, function(input)
 		vim.cmd(string.format("!gh repo create %s --public", input))
 	end)
-end, {
-	desc = "GitHub repo create (Public)",
-})
+end, "GitHub repo create (Public)")
 
 ------------------------ Dotnet CLI --------------------------
 
 ------------------------ Normal Mode -------------------------
 
-map("n", "<leader>nr", "<CMD>!dotnet run<CR>", {
-	desc = "Dot[N]et [R]un",
-})
+map("n", "<leader>nr", "<CMD>!dotnet run<CR>", "Dot[N]et [R]un")
 
-map("n", "<leader>nb", "<CMD>!dotnet build<CR>", {
-	desc = "Dot[N]et [B]uild",
-})
+map("n", "<leader>nb", "<CMD>!dotnet build<CR>", "Dot[N]et [B]uild")
