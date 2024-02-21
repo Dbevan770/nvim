@@ -1,4 +1,7 @@
 local builtin = require("telescope.builtin")
+local cmp = require("cmp")
+local comment_api = require("Comment.api")
+local comment_config = require("Comment.config"):get()
 local diagnostic = vim.diagnostic
 
 -- Custom keymap function
@@ -91,7 +94,6 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 map("n", "<leader>y", '"+y')
 map("n", "<leader>Y", '"+Y')
-map("n", "<leader>d", '"_d')
 
 -- DON'T EVER PRESS CAPITAL Q
 map("n", "Q", "<nop>")
@@ -222,6 +224,29 @@ map("n", "<leader>bl", "<CMD>BufferOrderByLanguage<CR>", "")
 
 map("n", "<leader>bw", "<CMD>BufferOrderByWindowNumber<CR>", "")
 
+------------------------ CMP Keymaps --------------------------
+
+------------------------ Insert Mode --------------------------
+map("i", "<C-Space>", cmp.mapping.complete(), "Complete")
+map("i", "<C-e>", cmp.mapping.close(), "Close")
+map("i", "<C-,>", cmp.mapping.scroll_docs(4), "Scroll down")
+map("i", "<C-m>", cmp.mapping.scroll_docs(-4), "Scroll up")
+map("i", "<C-n>", cmp.mapping.select_next_item(), "Select next item")
+map("i", "<C-p>", cmp.mapping.select_prev_item(), "Select previous item")
+map(
+	"i",
+	"<CR>",
+	cmp.mapping.confirm({
+		behavior = cmp.ConfirmBehavior.Insert,
+		select = true,
+	}),
+	"Confirm"
+)
+
+----------------------- Comment Keymaps -----------------------
+
+------------------------ Normal Mode --------------------------
+
 ---------------------- Nvim-Tree Keymaps ----------------------
 
 ------------------------ Normal Mode --------------------------
@@ -254,6 +279,10 @@ map("n", "<leader>gf", builtin.git_files, "Search in [G]it [F]iles")
 map("n", "<leader>sw", builtin.grep_string, "[S]earch current [W]ord")
 
 map("n", "<leader>sh", builtin.help_tags, "[S]earch [H]elp")
+
+map("n", "<leader>sc", builtin.highlights, "[S]earch [C]olors (highlight groups)")
+
+map("n", "<leader>sk", builtin.keymaps, "[S]earch [K]eymaps")
 
 map("n", "<leader>s/", telescope_live_grep_open_files, "[S]earch [/] in Open Files")
 
