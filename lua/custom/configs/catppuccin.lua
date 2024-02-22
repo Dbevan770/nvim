@@ -253,6 +253,7 @@ local opts = {
 				fg = colors.flamingo,
 				bold = true,
 			},
+			NvimTreeStatusLineNc = { bg = colors.mantle, fg = colors.mantle },
 			NvimTreeWindowPicker = {
 				fg = colors.red,
 				bg = colors.black2,
@@ -264,13 +265,29 @@ local opts = {
 
 			-- Nvim-tree Git highlight groups
 			NvimTreeGitNew = {
-				fg = colors.yellow,
+				fg = colors.green,
+			},
+			NvimTreeGitNewIcon = {
+				fg = colors.green,
 			},
 			NvimGitDeleted = {
 				fg = colors.red,
 			},
-			NvimTreeGitDirty = { fg = colors.red },
-			NvimTreeGitIgnored = { fg = colors.light_grey },
+			NvimTreeGitDeletedIcon = {
+				fg = colors.red,
+			},
+			NvimTreeGitDirty = { fg = colors.orange },
+			NvimTreeGitDirtyIcon = { fg = colors.orange },
+			NvimTreeGitIgnored = { fg = colors.black2 },
+			NvimTreeGitIgnoredIcon = { fg = colors.black2 },
+			NvimTreeGitMergedFile = { fg = colors.orange },
+			NvimTreeGitMergedIcon = { fg = colors.orange },
+			NvimTreeGitRenamed = { fg = colors.blue },
+			NvimTreeGitRenamedIcon = { fg = colors.blue },
+			NvimTreeGitStaged = { fg = colors.green },
+			NvimTreeGitStagedIcon = { fg = colors.green },
+			NvimTreeGitUnmerged = { fg = colors.orange },
+			NvimTreeGitUnmergedIcon = { fg = colors.orange },
 
 			-- Telescope integrations
 			TelescopeBorder = { fg = colors.blue, bg = colors.darker_black },

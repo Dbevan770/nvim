@@ -1,3 +1,12 @@
+local function git_branch()
+	local branch = vim.b.gitsigns_head
+	if branch == "main" then
+		return "  " .. branch
+	else
+		return "  " .. branch
+	end
+end
+
 local function diff_source()
 	local gitsigns = vim.b.gitsigns_status_dict
 	if gitsigns then
@@ -135,8 +144,7 @@ local opts = {
 		},
 		lualine_c = {
 			{
-				"b:gitsigns_head",
-				icon = "",
+				git_branch,
 				color = "LuaLineGitBranch",
 			},
 			{
