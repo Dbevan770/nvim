@@ -207,6 +207,10 @@ local opts = {
 			GitSignsTopdelete = { bg = colors.base, fg = colors.red },
 			GitSignsUntracked = { bg = colors.base, fg = colors.orange },
 
+			-- Lazygit integrations
+			LazyGitFloat = { bg = colors.mantle },
+			LazyGitBorder = { fg = colors.blue },
+
 			-- Lualine integrations
 			LuaLineEmptySep = { bg = colors.surface1 },
 			LuaLineNormalSectionA = { bg = colors.blue, fg = colors.mantle, bold = true },

@@ -1,5 +1,6 @@
 local builtin = require("telescope.builtin")
 local diagnostic = vim.diagnostic
+local bufnr = vim.api.nvim_get_current_buf()
 
 -- Custom keymap function
 local map = function(mode, key, result, desc, options)
@@ -231,6 +232,7 @@ map("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", "[T]oggle Nvim-[T]ree window")
 ---------------------- Telescope Keymaps ----------------------
 
 ------------------------ Normal Mode --------------------------
+local extensions = require("telescope").extensions
 
 map("n", "<leader>/", function()
 	-- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -245,6 +247,10 @@ map("n", "<leader><space>", builtin.buffers, "[ ] Find existing buffers")
 map("n", "<leader>ss", builtin.builtin, "[S]earch [S]election telescope")
 
 map("n", "<leader>sd", builtin.diagnostics, "[S]earch [D]iagnostics")
+
+map("n", "<leader>se", function()
+	extensions.lazygit.lazygit()
+end, "[S]earch Lazygit [E]xtension")
 
 map("n", "<leader>sf", builtin.find_files, "[S]earch [F]iles")
 
@@ -286,3 +292,61 @@ end, "GitHub repo create (Public)")
 map("n", "<leader>nr", "<CMD>!dotnet run<CR>", "Dot[N]et [R]un")
 
 map("n", "<leader>nb", "<CMD>!dotnet build<CR>", "Dot[N]et [B]uild")
+
+---------------------- Lazygit Keymaps -----------------------
+
+------------------------ Normal Mode -------------------------
+
+map("n", "<leader>gg", "<CMD>LazyGit<CR>", "[G]it [G]ui")
+
+------------------------ Rust Keymaps ------------------------
+
+------------------------ Normal Mode -------------------------
+
+map("n", "<leader>a", function()
+	vim.cmd.RustLsp("codeAction")
+end, {
+	silent = true,
+	buffer = bufnr,
+	desc = "Code [A]ction",
+})
+
+map("n", "<leader>ree", function()
+	vim.cmd.RustLsp("explainError")
+end, {
+	silent = true,
+	buffer = bufnr,
+	desx = "[R]ust [E]xplain [E]rror",
+})
+
+map("n", "<leader>rrd", function()
+	vim.cmd.RustLsp("renderDiagnostic")
+end, {
+	silent = true,
+	buffer = bufnr,
+	desc = "[R]ust [R]ender [D]iagnostics",
+})
+
+map("n", "<leader>roc", function()
+	vim.cmd.RustLsp("openCargo")
+end, {
+	silent = true,
+	buffer = bufnr,
+	desc = "[R]ust [O]pen [C]argo",
+})
+
+map("n", "<leader>rjl", function()
+	vim.cmd.RustLsp("joinLines")
+end, {
+	silent = true,
+	buffer = bufnr,
+	desc = "[R]ust [J]oin [L]ines",
+})
+
+map("n", "<leader>rcr", "<CMD>!cargo run<CR>", "[R]ust [C]argo [R]un")
+
+map("n", "<leader>rcb", "<CMD>!cargo build<CR>", "[R]ust [C]argo [B]uild")
+
+map("n", "<leader>rcd", "<CMD>!cargo doc<CR>", "[R]ust [C]argo [D]oc")
+
+map("n", "<leader>rct", "<CMD>!cargo test<CR>", "[R]ust [C]argo [T]est")

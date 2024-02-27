@@ -10,6 +10,17 @@ g.maplocalleader = " "
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
+-- Lazygit
+g.lazygit_floating_window_winblend = 0
+g.lazygit_floating_window_scaling_factor = 0.9
+g.lazygit_floating_window_border_char = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+g.lazygit_floating_window_use_plenary = 0
+g.lazygit_use_neovim_remote = 1
+
+-- Lazygit custom config
+g.lazygit_use_custom_config_file_path = 100
+g.lazygit_config_file_path = os.getenv("XDG_CONFIG_HOME") .. "/lazygit/config.yml"
+
 ------------------------------ Options ------------------------------
 -- Global Status Line
 opt.laststatus = 3
@@ -80,6 +91,19 @@ opt.colorcolumn = "100"
 opt.textwidth = 100
 
 ------------------------------- Auto Commands -------------------------------
+local augroup = vim.api.nvim_create_augroup -- Create an autogroup
+local autocmd = vim.api.nvim_create_autocmd -- Create an autocmd
+
+-- Store the git project directory into lazygit on load
+local lazygit_group = augroup("Lazygit", { clear = true })
+autocmd("BufEnter", {
+	callback = function()
+		local utils = require("lazygit.utils")
+		utils.project_root_dir()
+	end,
+	group = lazygit_group,
+	pattern = "*",
+})
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
