@@ -1,6 +1,6 @@
 local function git_branch()
 	local branch = vim.b.gitsigns_head
-	if branch == "main" then
+	if branch == "main" or branch == "master" then
 		return "  " .. branch
 	else
 		return "  " .. branch
@@ -29,11 +29,11 @@ local function lsp_status()
 	local lsp_name = ""
 
 	for _, client in ipairs(active_clients) do
-		if client.name ~= "null-ls" and client.name ~= "copilot" then
+		if client.name ~= "null-ls" then
 			lsp_name = "󰒋  LSP ~ " .. client.name .. " "
 			return lsp_name
-		elseif client.name == "copilot" then
-			lsp_name = "󰒋  Copilot "
+		elseif client.name == "copilot" and #active_clients == 1 then
+			lsp_name = "󰒋 LSP ~ " .. client.name .. " "
 			return lsp_name
 		end
 	end
@@ -140,6 +140,15 @@ local opts = {
 					left = 1,
 					right = 2,
 				},
+			},
+			{
+				"",
+				draw_empty = true,
+				separator = {
+					left = "",
+					right = "",
+				},
+				color = "LuaLineEmptySepB",
 			},
 		},
 		lualine_c = {

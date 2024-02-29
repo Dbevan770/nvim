@@ -50,7 +50,7 @@ opt.ruler = false
 -- Disable Nvim Intro
 opt.shortmess:append("sI")
 
-opt.signcolumn = "yes"
+opt.signcolumn = "yes:2"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true

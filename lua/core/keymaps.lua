@@ -222,6 +222,18 @@ map("n", "<leader>bl", "<CMD>BufferOrderByLanguage<CR>", "")
 
 map("n", "<leader>bw", "<CMD>BufferOrderByWindowNumber<CR>", "")
 
+------------------------ Carbon Keymaps -----------------------
+
+------------------------ Visual Mode --------------------------
+
+map("v", "<leader>cc", "<CMD>CarbonNow<CR>", "[C]arbon [C]reate")
+
+----------------------- ChatGPT Keymaps -----------------------
+
+------------------------ Normal Mode --------------------------
+
+map("n", "<leader>cc", "<CMD>ChatGPT<CR>", "[C]hat [C]reate")
+
 ---------------------- Nvim-Tree Keymaps ----------------------
 
 ------------------------ Normal Mode --------------------------

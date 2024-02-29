@@ -100,9 +100,9 @@ M.on_attach = function(_, bufnr)
 	end
 
 	nmap("<leader>lr", vim.lsp.buf.rename, "[L]SP [R]ename")
-	nmap("<leader>ca", function()
+	nmap("<leader>lc", function()
 		vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
-	end, "[C]ode [A]ction")
+	end, "[L]sp [C]ode Action")
 
 	nmap("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
 	nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")

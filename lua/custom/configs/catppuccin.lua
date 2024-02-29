@@ -114,6 +114,10 @@ local opts = {
 			BufferTabpages = { bg = colors.mantle, fg = colors.none },
 			BufferTabpage = { bg = colors.mantle, fg = colors.blue },
 
+			-- ChatGPT integrations
+			ChatGPTNormal = { bg = colors.base, fg = colors.text },
+			ChatGPTFloatBorder = { fg = colors.blue, bg = colors.base },
+
 			-- Cmp integrations
 			CmpItemAbbr = { fg = colors.overlay2 },
 			CmpItemAbbrDeprecated = { fg = colors.overlay0, style = { "strikethrough" } },
@@ -122,12 +126,12 @@ local opts = {
 			CmpItemAbbrMatch = { fg = colors.text, style = { "bold" } },
 			CmpItemAbbrMatchFuzzy = { fg = colors.text, style = { "bold" } },
 
-			CmpDoc = { bg = colors.darker_black },
-			CmpDocBorder = { fg = colors.darker_black, bg = colors.darker_black },
+			CmpDoc = { bg = colors.base },
+			CmpDocBorder = { fg = colors.blue, bg = colors.base },
 			CmpPmenu = {
-				bg = colors.black,
+				bg = colors.base,
 			},
-			CmpBorder = { fg = colors.blue },
+			CmpBorder = { fg = colors.blue, bg = colors.base },
 			CmpSel = { fg = colors.base, bg = colors.green },
 
 			-- Cmp item kind integrations
@@ -208,11 +212,12 @@ local opts = {
 			GitSignsUntracked = { bg = colors.base, fg = colors.orange },
 
 			-- Lazygit integrations
-			LazyGitFloat = { bg = colors.mantle },
-			LazyGitBorder = { fg = colors.blue },
+			LazyGitFloat = { bg = colors.base },
+			LazyGitBorder = { fg = colors.blue, bg = colors.base },
 
 			-- Lualine integrations
 			LuaLineEmptySep = { bg = colors.surface1 },
+			LuaLineEmptySepB = { bg = colors.black2 },
 			LuaLineNormalSectionA = { bg = colors.blue, fg = colors.mantle, bold = true },
 			LuaLineNormalSectionB = { bg = colors.surface0, fg = colors.blue },
 			LuaLineNormalSectionC = { bg = colors.mantle, fg = colors.overlay0 },
@@ -294,14 +299,14 @@ local opts = {
 			NvimTreeGitUnmergedIcon = { fg = colors.orange },
 
 			-- Telescope integrations
-			TelescopeBorder = { fg = colors.blue, bg = colors.darker_black },
+			TelescopeBorder = { fg = colors.blue, bg = colors.base },
 			TelescopeMatching = { fg = colors.blue },
-			TelescopeNormal = { bg = colors.darker_black },
-			TelescopePromptBorder = { fg = colors.blue, bg = colors.darker_black },
-			TelescopePromptNormal = { fg = colors.text, bg = colors.darker_black },
-			TelescopePromptPrefix = { fg = colors.flamingo, bg = colors.darker_black },
+			TelescopeNormal = { bg = colors.base },
+			TelescopePromptBorder = { fg = colors.blue, bg = colors.base },
+			TelescopePromptNormal = { fg = colors.text, bg = colors.base },
+			TelescopePromptPrefix = { fg = colors.flamingo, bg = colors.base },
 			TelescopePreviewTitle = { fg = colors.base, bg = colors.green },
-			TelescopeResultsTitle = { fg = colors.darker_black, bg = colors.lavender },
+			TelescopeResultsTitle = { fg = colors.base, bg = colors.lavender },
 			TelescopeSelection = { fg = colors.text, bg = colors.black2, style = { "bold" } },
 			TelescopeSelectionCaret = { fg = colors.flamingo },
 
