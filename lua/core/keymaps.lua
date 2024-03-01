@@ -27,8 +27,8 @@ end
 ------------------------ Normal Mode ------------------------
 
 map("n", "<C-h>", "<CMD>TmuxNavigateLeft<CR>", "Window left")
-map("n", "<C-k>", "<CMD>TmuxNavigateDown<CR>", "Window down")
-map("n", "<C-j>", "<CMD>TmuxNavigateUp<CR>", "Window up")
+map("n", "<C-j>", "<CMD>TmuxNavigateDown<CR>", "Window down")
+map("n", "<C-k>", "<CMD>TmuxNavigateUp<CR>", "Window up")
 map("n", "<C-l>", "<CMD>TmuxNavigateRight<CR>", "Window right")
 
 -------------------------- General --------------------------
@@ -41,19 +41,19 @@ map("i", "<C-e>", "<End>", "End of line")
 
 -- Navigate within insert mode
 map("i", "<C-h>", "<Left>", "Left")
-map("i", "<C-k>", "<Down>", "Down")
-map("i", "<C-j>", "<Up>", "Up")
+map("i", "<C-j>", "<Down>", "Down")
+map("i", "<C-k>", "<Up>", "Up")
 map("i", "<C-l>", "<Right>", "Right")
 
 ------------------------ Normal Mode ------------------------
 
 map("n", "<Esc>", "<CMD>noh<CR>", "Clear highlights")
 
--- Switch between windows
-map("n", "<C-h>", "<C-w>h", "Window left")
-map("n", "<C-k>", "<C-w>j", "Window down")
-map("n", "<C-j>", "<C-w>k", "Window up")
-map("n", "<C-l>", "<C-w>l", "Window right")
+-- -- Switch between windows
+-- map("n", "<C-h>", "<C-w>h", "Window left")
+-- map("n", "<C-k>", "<C-w>k", "Window down")
+-- map("n", "<C-j>", "<C-w>j", "Window up")
+-- map("n", "<C-l>", "<C-w>l", "Window right")
 
 -- Save the file
 map("n", "<C-s>", "<CMD>w<CR>", "Save file")
