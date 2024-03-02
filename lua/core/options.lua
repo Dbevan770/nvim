@@ -94,6 +94,16 @@ opt.textwidth = 100
 local augroup = vim.api.nvim_create_augroup -- Create an autogroup
 local autocmd = vim.api.nvim_create_autocmd -- Create an autocmd
 
+autocmd("BufEnter", {
+	pattern = { "tmux.conf" },
+	callback = function()
+		vim.lsp.start({
+			name = "tmux",
+			cmd = { "tmux-language-server" },
+		})
+	end,
+})
+
 -- Store the git project directory into lazygit on load
 local lazygit_group = augroup("Lazygit", { clear = true })
 autocmd("BufEnter", {
