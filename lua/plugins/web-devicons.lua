@@ -117,6 +117,11 @@ return {
 				name = "rb",
 			},
 
+			rs = {
+				icon = "",
+				name = "rs",
+			},
+
 			rpm = {
 				icon = "",
 				name = "rpm",

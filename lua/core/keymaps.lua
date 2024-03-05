@@ -280,9 +280,28 @@ map("n", "<leader>s/", telescope_live_grep_open_files, "[S]earch [/] in Open Fil
 
 map("n", "<leader>sg", builtin.live_grep, "[S]earch by [G]rep")
 
+map("n", "<leader>sm", builtin.man_pages, "[S]earch [M]an pages")
+
 map("n", "<leader>?", builtin.oldfiles, "[?] Find recently opened files")
 
 map("n", "<leader>sr", builtin.resume, "[S]earch [R]esume")
+
+local nmap = function(keys, func, desc)
+	if desc then
+		desc = "LSP: " .. desc
+	end
+
+	vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+end
+
+-- LSP Keymaps
+
+nmap("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
+nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
+nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
+nmap("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
+nmap("<leader>lds", builtin.lsp_document_symbols, "[L]sp [D]ocument [S]ymbols")
+nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 ------------------------ Github CLI ---------------------------
 

@@ -15,7 +15,7 @@ return {
 	},
 	opts = {
 		extensions = {
-			undo = {
+			["undo"] = {
 				require("telescope.themes").get_dropdown({}),
 				side_by_side = true,
 				layout_strategy = "vertical",

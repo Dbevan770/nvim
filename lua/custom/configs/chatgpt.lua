@@ -1,6 +1,5 @@
 local opts = {
 	-- The API key for OpenAI allowing use of ChatGPT
-	api_key_cmd = "pass show api/tokens/openai",
 	yank_register = "+",
 	edit_with_instructions = {
 		diff = false,

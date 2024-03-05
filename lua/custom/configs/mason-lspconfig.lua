@@ -90,7 +90,6 @@ M.opts = {
 }
 
 M.on_attach = function(_, bufnr)
-	local builtin = require("telescope.builtin")
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
@@ -103,13 +102,6 @@ M.on_attach = function(_, bufnr)
 	nmap("<leader>lc", function()
 		vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
 	end, "[L]sp [C]ode Action")
-
-	nmap("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
-	nmap("gr", builtin.lsp_references, "[G]oto [R]eferences")
-	nmap("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
-	nmap("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
-	nmap("<leader>lds", builtin.lsp_document_symbols, "[L]sp [D]ocument [S]ymbols")
-	nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 	nmap("<C-K>", vim.lsp.buf.signature_help, "Signature Documentation")

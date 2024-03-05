@@ -19,7 +19,7 @@ return {
 
 		which_key.register({
 			["<leader>b"] = { name = "[B]uffers", _ = "which_key_ignore" },
-			["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
+			["<leader>c"] = { name = "[C]hatGPT", _ = "which_key_ignore" },
 			["<leader>d"] = { name = "[D]ebug", _ = "which_key_ignore" },
 			["<leader>f"] = { name = "[F]ormat", _ = "which_key_ignore" },
 			["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
@@ -31,6 +31,7 @@ return {
 			["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
 			["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
 			["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+			["<leader>z"] = { name = "[Z]oxide", _ = "which_key_ignore" },
 
 			["t"] = { name = "[T]oggle Comments", _ = "which_key_ignore" },
 			["tc"] = { name = "[C]omments", _ = "which_key_ignore" },

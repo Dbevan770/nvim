@@ -35,6 +35,9 @@ local opts = {
 		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
 		mappings = {
 			n = { ["q"] = require("telescope.actions").close },
+			i = {
+				["<C-h>"] = "which_key",
+			},
 		},
 		vimgrep_arguments = {
 			"rg",
