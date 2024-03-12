@@ -64,7 +64,7 @@ M.opts = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({
+		["<C-y>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		}),

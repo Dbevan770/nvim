@@ -2,7 +2,10 @@ local M = {}
 
 M.servers = {
 	bashls = {},
-	clangd = {},
+	bufls = {},
+	clangd = {
+		filetypes = { "c", "cpp", "objc", "objcpp" },
+	},
 	cssls = {},
 	dockerls = {},
 	docker_compose_language_service = {},
