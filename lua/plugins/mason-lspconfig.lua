@@ -16,10 +16,15 @@ return {
 
 		mason_lspconfig.setup_handlers({
 			function(server_name)
+				local success, server_config = pcall(require, "custom.configs.lsp." .. server_name)
+				if not success then
+					server_config = {}
+				end
+
 				require("lspconfig")[server_name].setup({
 					capabilities = custom_config.capabilities,
 					on_attach = custom_config.on_attach,
-					settings = custom_config.servers[server_name],
+					settings = (server_config.settings or custom_config.servers[server_name]),
 					filetypes = (custom_config.servers[server_name] or {}).filetypes,
 				})
 			end,

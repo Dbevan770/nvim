@@ -1,7 +1,26 @@
 local M = {}
 
+local nvim_lsp = require("lspconfig")
+
 M.servers = {
 	bashls = {},
+	biome = {
+		cmd = { "biome", "lsp-proxy" },
+		filetypes = {
+			"javascript",
+			"javascriptreact",
+			"json",
+			"jsonc",
+			"typescript",
+			"typescript.tsx",
+			"typescriptreact",
+			"astro",
+			"svelte",
+			"vue",
+		},
+		root_dir = nvim_lsp.util.root_pattern("biome.json", "biome.jsonc"),
+		single_file_support = false,
+	},
 	bufls = {},
 	clangd = {
 		filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -27,8 +46,8 @@ M.servers = {
 	html = {
 		filetypes = { "html", "twig", "hbs" },
 	},
-	jsonls = {},
 	java_language_server = {},
+	jsonls = {},
 	lua_ls = {
 		Lua = {
 			runtime = {
@@ -52,7 +71,7 @@ M.servers = {
 		filetypes = { "cs", "vb" },
 		enable_editiorconfig_support = true,
 		enable_ms_build_load_projects_on_demand = false,
-		enable_roslyn_analyzers = false,
+		enable_roslyn_analyzers = true,
 		organize_imports_on_format = true,
 		enable_import_completion = true,
 		sdk_include_prereleases = true,

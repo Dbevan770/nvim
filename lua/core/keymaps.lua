@@ -47,13 +47,12 @@ map("i", "<C-l>", "<Right>", "Right")
 
 ------------------------ Normal Mode ------------------------
 
-map("n", "<Esc>", "<CMD>noh<CR>", "Clear highlights")
+-- Code Actions
+map("n", "<leader>a", function()
+	vim.lsp.buf.code_action()
+end, "Code [A]ctions")
 
--- -- Switch between windows
--- map("n", "<C-h>", "<C-w>h", "Window left")
--- map("n", "<C-k>", "<C-w>k", "Window down")
--- map("n", "<C-j>", "<C-w>j", "Window up")
--- map("n", "<C-l>", "<C-w>l", "Window right")
+map("n", "<Esc>", "<CMD>noh<CR>", "Clear highlights")
 
 -- Save the file
 map("n", "<C-s>", "<CMD>w<CR>", "Save file")
@@ -233,6 +232,7 @@ map("v", "<leader>cc", "<CMD>CarbonNow<CR>", "[C]arbon [C]reate")
 ------------------------ Normal Mode --------------------------
 
 map("n", "<leader>cc", "<CMD>ChatGPT<CR>", "[C]hat [C]reate")
+map("n", "<leader>ca", "<CMD>ChatGPT<CR>", "[C]hat [A]ctions")
 
 ---------------------- Nvim-Tree Keymaps ----------------------
 
@@ -333,14 +333,6 @@ map("n", "<leader>gg", "<CMD>LazyGit<CR>", "[G]it [G]ui")
 ------------------------ Rust Keymaps ------------------------
 
 ------------------------ Normal Mode -------------------------
-
-map("n", "<leader>a", function()
-	vim.cmd.RustLsp("codeAction")
-end, {
-	silent = true,
-	buffer = bufnr,
-	desc = "Code [A]ction",
-})
 
 map("n", "<leader>ree", function()
 	vim.cmd.RustLsp("explainError")

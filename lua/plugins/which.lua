@@ -18,6 +18,7 @@ return {
 		which_key.setup(opts)
 
 		which_key.register({
+			["<leader>a"] = { name = "Code [A]ctions", _ = "which_key_ignore" },
 			["<leader>b"] = { name = "[B]uffers", _ = "which_key_ignore" },
 			["<leader>c"] = { name = "[C]hatGPT", _ = "which_key_ignore" },
 			["<leader>d"] = { name = "[D]ebug", _ = "which_key_ignore" },

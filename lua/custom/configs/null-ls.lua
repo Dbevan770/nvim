@@ -1,4 +1,59 @@
 local null_ls = require("null-ls")
+
+-- code action sources
+local code_actions = null_ls.builtins.code_actions
+
+-- diagnostic sources
+local diagnostics = null_ls.builtins.diagnostics
+
+-- formatting sources
+local formatting = null_ls.builtins.formatting
+
+-- hover sources
+-- local hover = null_ls.builtins.hover
+
+-- completion sources
+local completion = null_ls.builtins.completion
+
+local sources = {
+	-- Code Actions
+	code_actions.gitsigns, -- Git signs actions
+
+	-- Completion
+	completion.luasnip, -- Snippets support
+
+	-- Diagnostics
+	diagnostics.buf, -- Protobuf support
+	diagnostics.mypy, -- Python support
+	diagnostics.stylelint, -- CSS support
+	diagnostics.swiftlint, -- Swift support
+	diagnostics.todo_comments, -- TODO support
+
+	-- Formatters
+	formatting.biome, -- Formatter for TS and JS
+	formatting.black, -- Python formatter
+	formatting.buf, -- Protobuf formatter
+	formatting.csharpier, -- C# formatter
+	formatting.goimports_reviser, -- Go formatter
+	formatting.golines, -- Go formatter
+	formatting.gofumpt, -- Go formatter
+	formatting.prettier.with({
+		filetypes = {
+			"css",
+			"scss",
+			"less",
+			"html",
+			"jsonc",
+			"yaml",
+			"markdown",
+			"markdown.mdx",
+			"graphql",
+			"handlebars",
+		},
+	}),
+	formatting.stylua, -- Lua formatter
+}
+
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local opts = {
@@ -32,19 +87,7 @@ local opts = {
 	root_dir = require("null-ls.utils").root_pattern(".null-ls-root", "Makefile", ".git"),
 	root_dir_async = nil,
 	should_attach = nil,
-	sources = {
-		-- Diagnostics
-		null_ls.builtins.diagnostics.mypy,
-
-		-- Formatters
-		null_ls.builtins.formatting.black,
-		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.prettier,
-		null_ls.builtins.formatting.csharpier,
-		null_ls.builtins.formatting.goimports_reviser,
-		null_ls.builtins.formatting.golines,
-		null_ls.builtins.formatting.gofumpt,
-	},
+	sources = sources,
 	temp_dir = nil,
 	update_in_insert = false,
 }
