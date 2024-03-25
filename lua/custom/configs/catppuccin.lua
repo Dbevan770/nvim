@@ -190,6 +190,7 @@ local opts = {
 			DevIconttf = { fg = colors.white },
 			DevIconrb = { fg = colors.pink },
 			DevIconrpm = { fg = colors.orange },
+			DevIconrs = { fg = colors.orange },
 			DevIconvue = { fg = colors.vibrant_green },
 			DevIconwoff = { fg = colors.white },
 			DevIconwoff2 = { fg = colors.white },
