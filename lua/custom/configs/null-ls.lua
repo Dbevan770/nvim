@@ -27,7 +27,6 @@ local sources = {
 	diagnostics.mypy, -- Python support
 	diagnostics.stylelint, -- CSS support
 	diagnostics.swiftlint, -- Swift support
-	diagnostics.todo_comments, -- TODO support
 
 	-- Formatters
 	formatting.biome, -- Formatter for TS and JS

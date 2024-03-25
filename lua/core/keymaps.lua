@@ -234,6 +234,13 @@ map("v", "<leader>cc", "<CMD>CarbonNow<CR>", "[C]arbon [C]reate")
 map("n", "<leader>cc", "<CMD>ChatGPT<CR>", "[C]hat [C]reate")
 map("n", "<leader>ca", "<CMD>ChatGPT<CR>", "[C]hat [A]ctions")
 
+----------------------- Markdown Keymaps ----------------------
+
+------------------------ Normal Mode --------------------------
+
+-- Toggle Markdown Preview
+map("n", "<leader>tm", "<CMD>RenderMarkdownToggle<CR>", "[T]oggle [M]arkdown Preview")
+
 ---------------------- Nvim-Tree Keymaps ----------------------
 
 ------------------------ Normal Mode --------------------------
