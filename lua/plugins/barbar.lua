@@ -1,6 +1,5 @@
 return {
-	"Dbevan770/barbar.nvim",
-	branch = "custom-close-button",
+	"git@github.com:romgrk/barbar.nvim.git",
 	dependencies = {
 		"lewis6991/gitsigns.nvim",
 		"nvim-tree/nvim-web-devicons",

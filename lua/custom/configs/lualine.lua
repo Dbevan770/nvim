@@ -206,31 +206,6 @@ local opts = {
 				always_visible = false,
 			},
 			{
-				"copilot",
-				symbols = {
-					status = {
-						icons = {
-							enabled = " ",
-							sleep = " ",
-							disabled = " ",
-							warning = " ",
-							unknown = " ",
-						},
-						hl = {
-							enabled = "#a6e3a1",
-							sleep = "#6c7086",
-							disabled = "#313244",
-							warning = "#f9e2af",
-							unknown = "#f38ba8",
-						},
-					},
-					spinners = require("copilot-lualine.spinners").dots,
-					spinner_color = "#6272A4",
-				},
-				show_colors = true,
-				show_loading = true,
-			},
-			{
 				lsp_status,
 				color = "LuaLineLspStatus",
 			},

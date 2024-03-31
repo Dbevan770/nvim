@@ -6,7 +6,11 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 	},
-	config = function()
+	opts = {
+		["gh"] = {},
+	},
+	config = function(_, opts)
+		require("telescope").setup(opts)
 		require("telescope").load_extension("gh")
 	end,
 }

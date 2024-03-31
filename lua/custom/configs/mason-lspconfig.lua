@@ -112,32 +112,35 @@ M.opts = {
 }
 
 M.on_attach = function(_, bufnr)
-	local nmap = function(keys, func, desc)
-		if desc then
-			desc = "LSP: " .. desc
-		end
+	vim.api.nvim_create_autocmd("LspAttach", {
+		callback = function()
+			local nmap = function(keys, func, desc)
+				if desc then
+					desc = "LSP: " .. desc
+				end
 
-		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-	end
+				vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+			end
+			nmap("<leader>lr", vim.lsp.buf.rename, "[L]SP [R]ename")
+			nmap("<leader>lc", function()
+				vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
+			end, "[L]sp [C]ode Action")
 
-	nmap("<leader>lr", vim.lsp.buf.rename, "[L]SP [R]ename")
-	nmap("<leader>lc", function()
-		vim.lsp.buf.code_action({ context = { only = { "quickfix", "refactor", "source" } } })
-	end, "[L]sp [C]ode Action")
+			nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+			nmap("<C-K>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-	nmap("<C-K>", vim.lsp.buf.signature_help, "Signature Documentation")
+			nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+			nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+			nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+			nmap("<leader>wl", function()
+				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+			end, "[W]orkspace [L]ist Folders")
 
-	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-	nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-	nmap("<leader>wl", function()
-		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	end, "[W]orkspace [L]ist Folders")
-
-	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-		vim.lsp.buf.format()
-	end, { desc = "Format current buffer with LSP" })
+			vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+				vim.lsp.buf.format()
+			end, { desc = "Format current buffer with LSP" })
+		end,
+	})
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()

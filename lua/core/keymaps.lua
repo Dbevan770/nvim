@@ -293,6 +293,9 @@ map("n", "<leader>?", builtin.oldfiles, "[?] Find recently opened files")
 
 map("n", "<leader>sr", builtin.resume, "[S]earch [R]esume")
 
+-- Notify History
+map("n", "<leader>sn", "<CMD>Telescope notify<CR>", "[S]earch [N]otifications")
+
 local nmap = function(keys, func, desc)
 	if desc then
 		desc = "LSP: " .. desc
