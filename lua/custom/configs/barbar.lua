@@ -114,6 +114,7 @@ local opts = {
 	tabpages = true,
 	exclude_ft = {
 		"gitcommit",
+		"dashboard",
 	},
 }
 

@@ -20,6 +20,10 @@ local function telescope_live_grep_open_files()
 	})
 end
 
+vim.keymap.set("n", "<leader>bi", "<CMD>lua vim.fn.getbufinfo()<CR>", {
+	desc = "Get current buffer info",
+})
+
 -------------------------- Keymaps --------------------------
 
 -------------------- Vim Tmux Navigator ---------------------

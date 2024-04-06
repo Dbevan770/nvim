@@ -25,8 +25,6 @@ local sources = {
 	-- Diagnostics
 	diagnostics.buf, -- Protobuf support
 	diagnostics.mypy, -- Python support
-	diagnostics.stylelint, -- CSS support
-	diagnostics.swiftlint, -- Swift support
 
 	-- Formatters
 	formatting.biome, -- Formatter for TS and JS
