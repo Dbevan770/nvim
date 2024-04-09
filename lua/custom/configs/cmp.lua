@@ -101,6 +101,12 @@ M.opts = {
 		},
 	},
 	sources = {
+    {
+      name = "path",
+    },
+    {
+      name = "buffer",
+    },
 		{
 			name = "nvim_lsp",
 		},
@@ -108,17 +114,11 @@ M.opts = {
 			name = "luasnip",
 		},
 		{
-			name = "crates",
-		},
-		{
 			name = "nvim_lua",
 		},
-		{
-			name = "path",
-		},
-		{
-			name = "buffer",
-		},
+    {
+      name = "crates",
+    },
 	},
 }
 

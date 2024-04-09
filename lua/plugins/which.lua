@@ -20,13 +20,11 @@ return {
 		which_key.register({
 			["<leader>a"] = { name = "Code [A]ctions", _ = "which_key_ignore" },
 			["<leader>b"] = { name = "[B]uffers", _ = "which_key_ignore" },
-			["<leader>c"] = { name = "[C]hatGPT", _ = "which_key_ignore" },
 			["<leader>d"] = { name = "[D]ebug", _ = "which_key_ignore" },
 			["<leader>f"] = { name = "[F]ormat", _ = "which_key_ignore" },
 			["<leader>g"] = { name = "[G]it", _ = "which_key_ignore" },
 			["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
 			["<leader>l"] = { name = "[L]SP", _ = "which_key_ignore" },
-			["<leader>n"] = { name = "Dot[N]et", _ = "which_key_ignore" },
 			["<leader>p"] = { name = "[P]ackage Manager", _ = "which_key_ignore" },
 			["<leader>r"] = { name = "[R]ust", _ = "which_key_ignore" },
 			["<leader>rc"] = { name = "[R]ust [C]argo", _ = "which_key_ignore" },

@@ -122,7 +122,7 @@ map("n", "<leader>bn", "<CMD>enew<CR>", "New buffer")
 
 map("n", "<leader>f", function()
 	vim.lsp.buf.format({ async = true })
-end, "Manual Lsp [F]omat")
+end, "Manual Lsp [F]ormat")
 
 -- Diagnostic keymaps
 map("n", "[d", diagnostic.goto_prev, "Go to previous diagnostic message")
@@ -225,19 +225,6 @@ map("n", "<leader>bl", "<CMD>BufferOrderByLanguage<CR>", "")
 
 map("n", "<leader>bw", "<CMD>BufferOrderByWindowNumber<CR>", "")
 
------------------------- Carbon Keymaps -----------------------
-
------------------------- Visual Mode --------------------------
-
-map("v", "<leader>cc", "<CMD>CarbonNow<CR>", "[C]arbon [C]reate")
-
------------------------ ChatGPT Keymaps -----------------------
-
------------------------- Normal Mode --------------------------
-
-map("n", "<leader>cc", "<CMD>ChatGPT<CR>", "[C]hat [C]reate")
-map("n", "<leader>ca", "<CMD>ChatGPT<CR>", "[C]hat [A]ctions")
-
 ----------------------- Markdown Keymaps ----------------------
 
 ------------------------ Normal Mode --------------------------
@@ -250,7 +237,7 @@ map("n", "<leader>tm", "<CMD>RenderMarkdownToggle<CR>", "[T]oggle [M]arkdown Pre
 ------------------------ Normal Mode --------------------------
 
 -- Toggle Nvim-Tree Window
-map("n", "<leader>tt", "<cmd>NvimTreeToggle<CR>", "[T]oggle Nvim-[T]ree window")
+map("n", "<C-t>", "<cmd>NvimTreeToggle<CR>", "Toggle Nvim Tree Window")
 
 ---------------------- Telescope Keymaps ----------------------
 
@@ -317,27 +304,6 @@ nmap("<leader>D", builtin.lsp_type_definitions, "Type [D]efinition")
 nmap("<leader>lds", builtin.lsp_document_symbols, "[L]sp [D]ocument [S]ymbols")
 nmap("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
------------------------- Github CLI ---------------------------
-
------------------------- Normal Mode --------------------------
-
--- Github CLI mappings
-map("n", "<leader>ghrcp", function()
-	vim.ui.input({
-		prompt = "Enter the name of the repo: ",
-	}, function(input)
-		vim.cmd(string.format("!gh repo create %s --public", input))
-	end)
-end, "GitHub repo create (Public)")
-
------------------------- Dotnet CLI --------------------------
-
------------------------- Normal Mode -------------------------
-
-map("n", "<leader>nr", "<CMD>!dotnet run<CR>", "Dot[N]et [R]un")
-
-map("n", "<leader>nb", "<CMD>!dotnet build<CR>", "Dot[N]et [B]uild")
-
 ---------------------- Lazygit Keymaps -----------------------
 
 ------------------------ Normal Mode -------------------------
@@ -353,7 +319,7 @@ map("n", "<leader>ree", function()
 end, {
 	silent = true,
 	buffer = bufnr,
-	desx = "[R]ust [E]xplain [E]rror",
+	desc = "[R]ust [E]xplain [E]rror",
 })
 
 map("n", "<leader>rrd", function()
