@@ -1,5 +1,4 @@
 local opts = {
-	on_attach = "default",
 	hijack_cursor = true,
 	auto_reload_on_write = true,
 	disable_netrw = true,

@@ -1,6 +1,13 @@
 local M = {}
 
 local nvim_lsp = require("lspconfig")
+local util = nvim_lsp.util
+local root_pattern = util.root_pattern
+local mason_registry = require("mason-registry")
+local vue_typescript_plugin = mason_registry
+		.get_package('vue-language-server')
+		:get_install_path()
+		.. '/node_modules/@vue/language-sever/@vue/typescript-plugin'
 
 M.servers = {
 	bashls = {},
@@ -46,7 +53,6 @@ M.servers = {
 	html = {
 		filetypes = { "html", "twig", "hbs" },
 	},
-	java_language_server = {},
 	jsonls = {},
 	lua_ls = {
 		Lua = {
@@ -63,25 +69,21 @@ M.servers = {
 		},
 	},
 	marksman = {},
-	omnisharp = {
-		cmd = {
-			"dotnet",
-			"~/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll",
-		},
-		filetypes = { "cs", "vb" },
-		enable_editiorconfig_support = true,
-		enable_ms_build_load_projects_on_demand = false,
-		enable_roslyn_analyzers = true,
-		organize_imports_on_format = true,
-		enable_import_completion = true,
-		sdk_include_prereleases = true,
-		analyze_open_documents_only = false,
-		init_options = {},
-	},
 	pyright = {},
 	sqls = {},
-	tailwindcss = {},
-	tsserver = {},
+	tsserver = {
+		init_options = {
+			plugins = {
+				{
+					name = "@vue/typescript-plugin",
+					location = vue_typescript_plugin,
+					languages = { "javascript", "typescript", "vue" },
+				},
+			},
+		},
+		filetypes = { "javascript", "typescript", "vue" },
+	},
+	volar = {},
 	yamlls = {},
 }
 

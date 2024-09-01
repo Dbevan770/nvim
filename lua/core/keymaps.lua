@@ -31,8 +31,8 @@ vim.keymap.set("n", "<leader>bi", "<CMD>lua vim.fn.getbufinfo()<CR>", {
 ------------------------ Normal Mode ------------------------
 
 map("n", "<C-h>", "<CMD>TmuxNavigateLeft<CR>", "Window left")
-map("n", "<C-j>", "<CMD>TmuxNavigateDown<CR>", "Window down")
-map("n", "<C-k>", "<CMD>TmuxNavigateUp<CR>", "Window up")
+map("n", "<C-j>", "<CMD>TmuxNavigateUp<CR>", "Window up")
+map("n", "<C-k>", "<CMD>TmuxNavigateDown<CR>", "Window down")
 map("n", "<C-l>", "<CMD>TmuxNavigateRight<CR>", "Window right")
 
 -------------------------- General --------------------------
@@ -45,8 +45,8 @@ map("i", "<C-e>", "<End>", "End of line")
 
 -- Navigate within insert mode
 map("i", "<C-h>", "<Left>", "Left")
-map("i", "<C-j>", "<Down>", "Down")
-map("i", "<C-k>", "<Up>", "Up")
+map("i", "<C-j>", "<Up>", "Up")
+map("i", "<C-k>", "<Down>", "Down")
 map("i", "<C-l>", "<Right>", "Right")
 
 ------------------------ Normal Mode ------------------------
@@ -107,8 +107,6 @@ map("n", "<Space>", "<nop>")
 map("n", "<C-f>", "<cmd>silent !tmux new tmux-sessionizer<CR>")
 
 -- Movement keybinds
-map("n", "<C-n>", "<cmd>cnext<CR>zz")
-map("n", "<C-p>", "<cmd>cprev<CR>zz")
 map("n", "<leader>ln", "<cmd>lnext<CR>zz")
 map("n", "<leader>lp", "<cmd>lprev<CR>zz")
 
@@ -139,8 +137,8 @@ end, "Escape terminal mode")
 ------------------------- Visual Mode ------------------------
 
 -- Move selection up or down
-map("v", "K", ":m '>+1<CR>gv=gv") -- DOWN
 map("v", "J", ":m '<-2<CR>gv=gv") -- UP
+map("v", "K", ":m '>+1<CR>gv=gv") -- DOWN
 
 -- Yank to system clipboard
 map("v", "<leader>y", '"+y')
@@ -148,10 +146,10 @@ map("v", "<leader>y", '"+y')
 -- Delete to void register (gets thrown out)
 map("v", "<leader>d", '"_d')
 
-map("v", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", {
+map("v", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gk"', "Move up", {
 	expr = true,
 })
-map("v", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", {
+map("v", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gj"', "Move down", {
 	expr = true,
 })
 map("v", "<", "<gv", "Indent line")
@@ -237,7 +235,7 @@ map("n", "<leader>tm", "<CMD>RenderMarkdownToggle<CR>", "[T]oggle [M]arkdown Pre
 ------------------------ Normal Mode --------------------------
 
 -- Toggle Nvim-Tree Window
-map("n", "<C-t>", "<cmd>NvimTreeToggle<CR>", "Toggle Nvim Tree Window")
+map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", "Toggle Nvim Tree Window")
 
 ---------------------- Telescope Keymaps ----------------------
 
@@ -314,37 +312,57 @@ map("n", "<leader>gg", "<CMD>LazyGit<CR>", "[G]it [G]ui")
 
 ------------------------ Normal Mode -------------------------
 
-map("n", "<leader>ree", function()
-	vim.cmd.RustLsp("explainError")
-end, {
-	silent = true,
-	buffer = bufnr,
-	desc = "[R]ust [E]xplain [E]rror",
-})
+map(
+	"n",
+	"<leader>ree",
+	function()
+		vim.cmd.RustLsp("explainError")
+	end,
+	"[R]ust [E]xplain [E]rror",
+	{
+		silent = true,
+		buffer = bufnr,
+	}
+)
 
-map("n", "<leader>rrd", function()
-	vim.cmd.RustLsp("renderDiagnostic")
-end, {
-	silent = true,
-	buffer = bufnr,
-	desc = "[R]ust [R]ender [D]iagnostics",
-})
+map(
+	"n",
+	"<leader>rrd",
+	function()
+		vim.cmd.RustLsp("renderDiagnostic")
+	end,
+	"[R]ust [R]ender [D]iagnostics",
+	{
+		silent = true,
+		buffer = bufnr,
+	}
+)
 
-map("n", "<leader>roc", function()
-	vim.cmd.RustLsp("openCargo")
-end, {
-	silent = true,
-	buffer = bufnr,
-	desc = "[R]ust [O]pen [C]argo",
-})
+map(
+	"n",
+	"<leader>roc",
+	function()
+		vim.cmd.RustLsp("openCargo")
+	end,
+	"[R]ust [O]pen [C]argo",
+	{
+		silent = true,
+		buffer = bufnr,
+	}
+)
 
-map("n", "<leader>rjl", function()
-	vim.cmd.RustLsp("joinLines")
-end, {
-	silent = true,
-	buffer = bufnr,
-	desc = "[R]ust [J]oin [L]ines",
-})
+map(
+	"n",
+	"<leader>rjl",
+	function()
+		vim.cmd.RustLsp("joinLines")
+	end,
+	"[R]ust [J]oin [L]ines",
+	{
+		silent = true,
+		buffer = bufnr,
+	}
+)
 
 map("n", "<leader>rcr", "<CMD>!cargo run<CR>", "[R]ust [C]argo [R]un")
 
